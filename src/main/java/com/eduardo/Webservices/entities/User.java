@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//SEMPRE DEPNEDE DA ESPECIFICACAO
+
 @Entity
 public class User implements Serializable {
 	

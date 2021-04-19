@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.eduardo.Webservices.entities.Category;
 import com.eduardo.Webservices.entities.Order;
 import com.eduardo.Webservices.entities.OrderItem;
+import com.eduardo.Webservices.entities.Payment;
 import com.eduardo.Webservices.entities.Product;
 import com.eduardo.Webservices.entities.User;
 import com.eduardo.Webservices.entities.enums.OrderStatus;
@@ -45,7 +46,7 @@ public class TestConfig implements CommandLineRunner{
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 		
-		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"),OrderStatus.CANCELED, u1); //PADRAO UTC
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"),OrderStatus.PAID, u1); //PADRAO UTC
 		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"),OrderStatus.DELIVERED, u2);
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),OrderStatus.WAITTING_PAYMENT, u1);
 		
@@ -80,6 +81,10 @@ public class TestConfig implements CommandLineRunner{
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
+		Payment pay = new Payment(null,Instant.parse("2019-06-20T21:53:07Z"),o1 );
+		o1.setPayment(pay);
+		
+		orderRepository.save(o1);
 		
 	}
 
